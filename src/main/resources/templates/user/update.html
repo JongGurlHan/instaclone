@@ -1,5 +1,6 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!--<%@ include file="../layout/header.jsp"%>-->
 <div th:replace="layout/header" :: menu />
@@ -22,11 +23,13 @@
             <!--프로필셋팅 아이디영역end-->
 
             <!--프로필 수정-->
-            <form id="profileUpdate" th:object="${principal}">
+<!--            form태그는 어딘가로 이동해야하는데, action이 있어야 하는데 없으면 디폴트로 자기 자신으로 넘어간다.-->
+<!--            이 js 함수가 실행되게 하려면 event를 날려야 한다. -->
+            <form id="profileUpdate" th:object="${principal}"  th:onsubmit="|update(*{id}, event)|">
             <div class="content-item__02">
                 <div class="item__title">이름</div>
                 <div class="item__input">
-                    <input type="text" name="name" placeholder="이름" value="겟인데어" th:field="*{name}"/>
+                    <input type="text" name="name" placeholder="이름" value="겟인데어" th:field="*{name}" required="required" />
                 </div>
             </div>
             <div class="content-item__03">
@@ -38,7 +41,7 @@
             <div class="content-item__04">
                 <div class="item__title">패스워드</div>
                 <div class="item__input">
-                    <input type="password" name="password" placeholder="패스워드"  />
+                    <input type="password" name="password" placeholder="패스워드" required="required"/>
                 </div>
             </div>
             <div class="content-item__05">
@@ -70,7 +73,7 @@
             <div class="content-item__09">
                 <div class="item__title">전회번호</div>
                 <div class="item__input">
-                    <input type="text"  th:field="*{phone}"name="tel" placeholder="전화번호"
+                    <input type="text"  th:field="*{phone}"name="phone" placeholder="전화번호"
                            value="0102222" />
                 </div>
             </div>
