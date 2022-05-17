@@ -1,6 +1,9 @@
 
 
-<!--<%@ include file="../layout/header.jsp" %>-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--<%@ include file="../layout/header.jsp"%>-->
+<div th:replace="layout/header" :: menu />
 
 <!--사진 업로드페이지 중앙배치-->
 <main class="uploadContainer">

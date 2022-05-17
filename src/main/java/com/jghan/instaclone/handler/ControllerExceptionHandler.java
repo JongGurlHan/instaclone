@@ -15,7 +15,7 @@ public class ControllerExceptionHandler {
 
 
     //CMRespDto는 전역적으로 쓸거라서 제네릭으로 선언
-    @ExceptionHandler(CustomValidationException.class) //RuntimeException이 발동하는 모든 Exception을 이 함수가 가로챔
+    @ExceptionHandler(CustomValidationException.class) //CustomValidationException 발동하는 모든 Exception을 이 함수가 가로챔
 //    public CMRespDto<?> validationException(CustomValidationException e){
 //        return new CMRespDto<Map<String, String >>(-1, e.getMessage(), e.getErrorMap());
     public String validationException(CustomValidationException e){
