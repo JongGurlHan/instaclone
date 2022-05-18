@@ -21,7 +21,11 @@ public class ControllerExceptionHandler {
     //CMRespDto는 전역적으로 쓸거라서 제네릭으로 선언
     @ExceptionHandler(CustomValidationException.class) //CustomValidationException 발동하는 모든 Exception을 이 함수가 가로챔
     public String validationException(CustomValidationException e){
-        return Script.back(e.getErrorMap().toString());
+        if(e.getErrorMap() ==null){
+            return Script.back(e.getMessage());
+        }else{
+            return Script.back(e.getErrorMap().toString());
+        }
     }
 
     //object리턴 - api통신때

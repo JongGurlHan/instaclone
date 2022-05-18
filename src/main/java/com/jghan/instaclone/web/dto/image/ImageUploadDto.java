@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class ImageUploadDto {
+
+
+    //MultipartFile 에는 @Notblank가 지원안된다.
     private MultipartFile file;
     private String caption;
 

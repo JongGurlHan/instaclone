@@ -1,6 +1,7 @@
 package com.jghan.instaclone.web;
 
 import com.jghan.instaclone.config.auth.PrincipalDetails;
+import com.jghan.instaclone.handler.ex.CustomValidationException;
 import com.jghan.instaclone.service.ImageService;
 import com.jghan.instaclone.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,9 @@ public class ImageController {
     @PostMapping("/image")
     public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
+        if(imageUploadDto.getFile().isEmpty()){
+            throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
+        }
         imageService.upload(imageUploadDto, principalDetails);
 
         return "redirect:/user/"+principalDetails.getUser().getId();
