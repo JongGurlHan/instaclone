@@ -3,7 +3,6 @@ package com.jghan.instaclone.web.api;
 import com.jghan.instaclone.config.auth.PrincipalDetails;
 import com.jghan.instaclone.domain.user.User;
 import com.jghan.instaclone.handler.ex.CustomValidationApiException;
-import com.jghan.instaclone.handler.ex.CustomValidationException;
 import com.jghan.instaclone.service.UserService;
 import com.jghan.instaclone.web.dto.CMRespDto;
 import com.jghan.instaclone.web.dto.user.UserUpdateDto;
@@ -38,6 +37,7 @@ public class UserApiController {
                 errorMap.put(error.getField(), error.getDefaultMessage());
                             }
             throw new CustomValidationApiException("유효성 검사 실패함", errorMap);
+
         }else {
 
             User userEntity = userService.update(id, userUpdateDto.toEntity());
@@ -46,9 +46,6 @@ public class UserApiController {
 
 
         }
-
-
-
     }
 
 

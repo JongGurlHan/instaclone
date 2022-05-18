@@ -1,5 +1,6 @@
 package com.jghan.instaclone.handler;
 
+import com.jghan.instaclone.handler.ex.CustomApiException;
 import com.jghan.instaclone.handler.ex.CustomValidationApiException;
 import com.jghan.instaclone.handler.ex.CustomValidationException;
 import com.jghan.instaclone.util.Script;
@@ -27,7 +28,11 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomValidationApiException.class)
     //ajax통신할때는 ResponseEntity를 사용해야지 http 상태코드를 전달할 수 있다. 그래서 분기하기가 쉽다.
     public ResponseEntity<?> validationApiException(CustomValidationApiException e){
-        System.out.println("================나 실행됨?=====================");
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CustomApiException.class)
+    public ResponseEntity<?> apiException(CustomApiException e){
+        return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
     }
 }
