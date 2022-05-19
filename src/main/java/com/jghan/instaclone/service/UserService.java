@@ -36,13 +36,14 @@ public class UserService {
         //1) get() :무조건 찾았다. 걱정마
         //2) orElseThrow() :못찾았어 exception발동시킬께
 
-        User userEntity = userRepository.findById(id).orElseThrow(() -> {return new CustomValidationApiException("찾을수 없는id입니다."); });
+        User userEntity = userRepository.findById(id).orElseThrow(() -> { return new CustomValidationApiException("찾을 수 없는 id입니다.");});
+
+        //2.영속화된 오브젝를 수정 - 더티체킹(업데이트 완료)
+        userEntity.setName(user.getName());
 
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 
-        //2.영속화된 오브젝를 수정 - 더티체킹(업데이트 완료)
-        userEntity.setName(user.getName());
         userEntity.setPassword(encPassword);
         userEntity.setBio(user.getBio());
         userEntity.setWebsite(user.getWebsite());

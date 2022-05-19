@@ -24,6 +24,7 @@ function update(userId, event) {
        }else{
            //json object를 Json 문자열로 변환
            alert(JSON.stringify(error.responseJSON.data));
+           }
     });
 
 

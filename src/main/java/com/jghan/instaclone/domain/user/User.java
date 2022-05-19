@@ -1,5 +1,6 @@
 package com.jghan.instaclone.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jghan.instaclone.domain.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,6 +44,7 @@ public class User {
     //Lazy = User를 SELECT할때 해당 유저 ID로 등록된 image들을 가져오지마 - 대신 getImages()함수의 image들이호출될때 가져와!
     //Eager = User를 SELECT할때 해당 유저 ID로 등록된 image들을 전부 Join해서 가져와!
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"user"}) //Image내부에 있는 user를 무시하고 파싱한다.
     private List<Image> images;
 
 
