@@ -2,12 +2,13 @@ package com.jghan.instaclone.service;
 
 import com.jghan.instaclone.domain.user.User;
 import com.jghan.instaclone.domain.user.UserRepository;
+import com.jghan.instaclone.handler.ex.CustomException;
 import com.jghan.instaclone.handler.ex.CustomValidationApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -15,6 +16,19 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Transactional(readOnly = true)
+    public User userProfile(int userId){
+
+        //SELECT * FROM image WHERE USERiD = :userId;
+        User userEntity = userRepository.findById(userId).orElseThrow(() -> {
+            throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
+        }); //유저를 못찾을수 있으니 orElseThrow던짐
+
+
+
+        return userEntity;
+    }
 
     @Transactional
     public User update(int id, User user){

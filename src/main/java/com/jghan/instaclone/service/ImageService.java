@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,6 +23,7 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
+    @Transactional
     public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails){
 
         UUID uuid = UUID.randomUUID();
@@ -39,9 +41,9 @@ public class ImageService {
 
         //Image 테이블에 저장
         Image image = imageUploadDto.toEntity(imageFilename, principalDetails.getUser());
-        Image imageEntity = imageRepository.save(image);
+        imageRepository.save(image);
 
-        System.out.println(imageEntity);
+//        System.out.println(imageEntity.toString());
 
     }
 }

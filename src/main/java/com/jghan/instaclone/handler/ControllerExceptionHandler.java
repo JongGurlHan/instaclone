@@ -1,6 +1,7 @@
 package com.jghan.instaclone.handler;
 
 import com.jghan.instaclone.handler.ex.CustomApiException;
+import com.jghan.instaclone.handler.ex.CustomException;
 import com.jghan.instaclone.handler.ex.CustomValidationApiException;
 import com.jghan.instaclone.handler.ex.CustomValidationException;
 import com.jghan.instaclone.util.Script;
@@ -10,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RestController
 @ControllerAdvice //모든 Exception들을 낚아챔
@@ -26,6 +25,11 @@ public class ControllerExceptionHandler {
         }else{
             return Script.back(e.getErrorMap().toString());
         }
+    }
+
+    @ExceptionHandler(CustomException.class) //CustomValidationException 발동하는 모든 Exception을 이 함수가 가로챔
+    public String exception(CustomException e){
+       return  Script.back(e.getMessage());
     }
 
     //object리턴 - api통신때
