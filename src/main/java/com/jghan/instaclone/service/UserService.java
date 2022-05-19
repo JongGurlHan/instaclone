@@ -4,6 +4,7 @@ import com.jghan.instaclone.domain.user.User;
 import com.jghan.instaclone.domain.user.UserRepository;
 import com.jghan.instaclone.handler.ex.CustomException;
 import com.jghan.instaclone.handler.ex.CustomValidationApiException;
+import com.jghan.instaclone.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,22 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(readOnly = true)
-    public User userProfile(int userId){
+    public UserProfileDto userProfile(int pageUserId, int principalId){
+
+        UserProfileDto dto = new UserProfileDto();
 
         //SELECT * FROM image WHERE USERiD = :userId;
-        User userEntity = userRepository.findById(userId).orElseThrow(() -> {
+        User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> {
             throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
         }); //유저를 못찾을수 있으니 orElseThrow던짐
 
+        dto.setUser(userEntity);
+        //pageUserId 와 principalId가 같은지 비교
+        dto.setPageOwnerState(pageUserId == pageUserId);
+        dto.setImageCount(userEntity.getImages().size());
 
 
-        return userEntity;
+        return dto;
     }
 
     @Transactional

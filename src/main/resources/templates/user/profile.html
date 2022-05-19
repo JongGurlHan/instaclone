@@ -5,7 +5,7 @@
 <!--프로필 섹션-->
 <section class="profile">
   <!--유저정보 컨테이너-->
-  <div class="profileContainer" th:object="${user}">
+  <div class="profileContainer" th:object="${dto.user}">
 
     <!--유저이미지-->
     <div class="profile-left">
@@ -27,8 +27,13 @@
       <div class="name-group">
         <h2 th:text="*{name}">유저이름</h2>
 
-        <button class="cta" onclick="location.href='/image/upload'">사진등록</button>
-        <button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+        <div th:if="${dto.pageOwnerState == true}">
+          <button class="cta" onclick="location.href='/image/upload'">사진등록</button>
+        </div>
+        <div th:unless="${dto.pageOwnerState == true}">
+          <button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+        </div>
+
         <button class="modi" onclick="popup('.modal-info')">
           <i class="fas fa-cog"></i>
         </button>
@@ -36,7 +41,7 @@
 
       <div class="subscribe">
         <ul>
-          <li><a href=""> 게시물<span>3</span>
+          <li><a href=""> 게시물<span th:text="${dto.imageCount}">3</span>
           </a></li>
           <li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
           </a></li>
@@ -62,7 +67,7 @@
       <div class="tab-1-content-inner">
 
         <!--이미지들-->
-        <tr th:each="image: ${user.images}">
+        <tr th:each="image: ${dto.user.images}">
           <div class="img-box">
             <a href=""> <img src="/images/home.jpg" th:src="'file:///'+ ${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>
             </a>
