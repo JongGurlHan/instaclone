@@ -24,7 +24,6 @@ public class UserController {
         UserProfileDto dto = userService.userProfile(pageUserId, principalDetails.getUser().getId());
 
         model.addAttribute("dto", dto);
-        System.out.println(dto.isPageOwnerState());
         return "user/profile";
     }
 

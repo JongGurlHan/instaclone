@@ -39,17 +39,27 @@
         </a>
         <nav class="navi">
             <ul class="navi-list">
-                <li class="navi-item"><a href="/">
+<!--                <div th:text="${dto.user.id}">아이디정보</div>-->
+
+
+<!--            <div sec:authentication="principal.user.id" var="id">Bob</div>-->
+<!--                <div th:text="${dto.user.id}">아이디정보</div>-->
+
+
+                <li class="navi-item" ><a href="/">
                     <i class="fas fa-home"></i>
                 </a></li>
                 <li class="navi-item"><a href="/image/popular">
                     <i class="far fa-compass"></i>
                 </a></li>
-                <li class="navi-item"><a href="/user/1">
+                <li class="navi-item">
+                    <a href="/user/1" th:href="@{/user/1} ">
                     <i class="far fa-user"></i>
-                </a></li>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
 </header>
+</body>
 </div>

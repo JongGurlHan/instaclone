@@ -2,6 +2,7 @@
 
 <!--<%@ include file="../layout/header.jsp"%>-->
 <div th:replace="layout/header" :: menu />
+
 <!--프로필 섹션-->
 <section class="profile">
   <!--유저정보 컨테이너-->
@@ -32,10 +33,10 @@
         </div>
         <div th:if ="${dto.pageOwnerState == false}">
           <div th:if="${dto.followState == true}">
-            <button class="cta blue" onclick="toggleSubscribe(this)">팔로우 취소</button>
+            <button class="cta blue" th:onclick="toggleSubscribe([[${dto.user.id}]], this)">팔로우 취소</button>
           </div>
           <div th:if="${dto.followState == false}">
-            <button class="cta" onclick="toggleSubscribe(this)">팔로우</button>
+            <button class="cta" th:onclick="toggleSubscribe([[${dto.user.id}]],this)">팔로우</button>
           </div>
         </div>
 
@@ -157,6 +158,7 @@
           <button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
         </div>
       </div>
+
     </div>
   </div>
 
