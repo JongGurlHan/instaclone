@@ -22,7 +22,7 @@
     </div>
     <!--유저이미지end-->
 
-    <!--유저정보 및 사진등록 구독하기-->
+    <!--유저정보 및 사진등록 팔로우하기-->
     <div class="profile-right">
       <div class="name-group">
         <h2 th:text="*{name}">유저이름</h2>
@@ -30,8 +30,13 @@
         <div th:if="${dto.pageOwnerState == true}">
           <button class="cta" onclick="location.href='/image/upload'">사진등록</button>
         </div>
-        <div th:unless="${dto.pageOwnerState == true}">
-          <button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+        <div th:if ="${dto.pageOwnerState == false}">
+          <div th:if="${dto.followState == true}">
+            <button class="cta blue" onclick="toggleSubscribe(this)">팔로우 취소</button>
+          </div>
+          <div th:if="${dto.followState == false}">
+            <button class="cta" onclick="toggleSubscribe(this)">팔로우</button>
+          </div>
         </div>
 
         <button class="modi" onclick="popup('.modal-info')">
@@ -43,7 +48,7 @@
         <ul>
           <li><a href=""> 게시물<span th:text="${dto.imageCount}">3</span>
           </a></li>
-          <li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
+          <li><a href="javascript:subscribeInfoModalOpen();"> 팔로우정보<span th:text="${dto.followCount} ">2</span>
           </a></li>
         </ul>
       </div>
@@ -52,7 +57,7 @@
         <h4 th:text="*{website}">https://github.com/codingspecialist</h4>
       </div>
     </div>
-    <!--유저정보 및 사진등록 구독하기-->
+    <!--유저정보 및 사진등록 팔로우하기-->
 
   </div>
 </section>
@@ -69,7 +74,19 @@
         <!--이미지들-->
         <tr th:each="image: ${dto.user.images}">
           <div class="img-box">
-            <a href=""> <img src="/images/home.jpg" th:src="'file:///'+ ${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>
+            <a href="">
+
+              <img src="/images/home.jpg"
+                   th:src="|${@environment.getProperty('file.path')}${image.postImageUrl}|"/>
+
+
+<!--                   th:src="|/upload/${image.postImageUrl}|"/>-->
+<!--                   th:src="|/upload/${image.postImageUrl}|"/>-->
+<!--                   th:src="|${@environment.getProperty('file.path')}${image.postImageUrl}|"/>-->
+<!--                   th:src="${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>-->
+              <!--                   th:src="${@environment.getProperty('file.path')}+${image.postImageUrl}"/>-->
+
+              <!--                   th:src="'file:///'+ ${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>-->
             </a>
             <div class="comment">
               <a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
@@ -108,7 +125,7 @@
 <div class="modal-subscribe">
   <div class="subscribe">
     <div class="subscribe-header">
-      <span>구독정보</span>
+      <span>팔로우정보</span>
       <button onclick="modalClose()">
         <i class="fas fa-times"></i>
       </button>
@@ -124,7 +141,7 @@
           <h2>love</h2>
         </div>
         <div class="subscribe__btn">
-          <button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
+          <button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
         </div>
       </div>
 
@@ -137,7 +154,7 @@
           <h2>ssar</h2>
         </div>
         <div class="subscribe__btn">
-          <button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
+          <button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
         </div>
       </div>
     </div>

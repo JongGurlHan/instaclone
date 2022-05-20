@@ -13,10 +13,10 @@ public class ImageUploadDto {
     private MultipartFile file;
     private String caption;
 
-    public Image toEntity(String postImagUrl, User user){
+    public Image toEntity(String postImageUrl, User user){
         return Image.builder()
                 .caption(caption)
-                .postImageUrl(postImagUrl)
+                .postImageUrl(postImageUrl)
                 .user(user)
                 .build();
     }

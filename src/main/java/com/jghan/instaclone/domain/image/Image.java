@@ -21,7 +21,7 @@ public class Image {
     private int id;
 
     private String caption;
-    private String postImageUrl; //사진을 전송받아서 그 사진을 서버의 특정 폴더에 저장 -Db에 그 저장된 경로를 insert
+    private String postImageUrl; //-Db에 그 저장될 이미지 명
 
     @JoinColumn(name = "userId") // DB컬럼명 설정
     @ManyToOne

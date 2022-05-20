@@ -1,5 +1,6 @@
 package com.jghan.instaclone.service;
 
+import com.jghan.instaclone.domain.follow.FollowRepositoy;
 import com.jghan.instaclone.domain.user.User;
 import com.jghan.instaclone.domain.user.UserRepository;
 import com.jghan.instaclone.handler.ex.CustomException;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final FollowRepositoy followRepositoy;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(readOnly = true)
@@ -30,9 +32,14 @@ public class UserService {
 
         dto.setUser(userEntity);
         //pageUserId 와 principalId가 같은지 비교
-        dto.setPageOwnerState(pageUserId == pageUserId);
+        dto.setPageOwnerState(pageUserId == principalId);
         dto.setImageCount(userEntity.getImages().size());
 
+        int followState = followRepositoy.mFollowState(principalId, pageUserId);
+        int followCount = followRepositoy.mFollowCount(pageUserId);
+
+        dto.setFollowState(followState == 1);
+        dto.setFollowCount(followCount);
 
         return dto;
     }
