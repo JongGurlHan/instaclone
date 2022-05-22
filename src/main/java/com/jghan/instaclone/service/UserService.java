@@ -41,6 +41,7 @@ public class UserService {
         dto.setFollowState(followState == 1);
         dto.setFollowCount(followCount);
 
+
         return dto;
     }
 

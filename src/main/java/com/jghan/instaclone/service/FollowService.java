@@ -30,7 +30,7 @@ public class FollowService {
         //쿼리 준비
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT u.id, u.username, u.profileImageUrl, ");
-        sb.append("if((SELECT 1 FROM follow WHERE fromUserId = 1 AND toUserId = u.id), 1, 0) subscribeState, ");
+        sb.append("if((SELECT 1 FROM follow WHERE fromUserId = ? AND toUserId = u.id), 1, 0) followState, ");
         sb.append("if((? = u.id), 1, 0)equalUserState ");
         sb.append("FROM user u INNER JOIN follow f ");
         sb.append("ON u.id = f.toUserId ");
@@ -51,6 +51,7 @@ public class FollowService {
         //쿼리 실행(qlrm 라이브러리 필요, dto에 db결과를 매핑하기 위해서)
         JpaResultMapper result = new JpaResultMapper();
         List<FollowDto> followDtos = result.list(query, FollowDto.class);//한건을 받을게 아니니까
+
         //(쿼리, 리턴받을 타입)
 
         return  followDtos;

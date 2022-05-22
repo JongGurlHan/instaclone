@@ -34,3 +34,4 @@ public class FollowApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "언팔로우 성공", null), HttpStatus.OK);
     }
 }
+

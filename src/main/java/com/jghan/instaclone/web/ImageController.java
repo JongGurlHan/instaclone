@@ -3,7 +3,9 @@ package com.jghan.instaclone.web;
 import com.jghan.instaclone.config.auth.PrincipalDetails;
 import com.jghan.instaclone.handler.ex.CustomValidationException;
 import com.jghan.instaclone.service.ImageService;
+import com.jghan.instaclone.service.UserService;
 import com.jghan.instaclone.web.dto.image.ImageUploadDto;
+import com.jghan.instaclone.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ImageController {
 
     private final ImageService imageService;
+    private final UserService userService;
+
 
     @GetMapping({"/", "/image/story"})
     public String story(){

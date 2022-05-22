@@ -39,13 +39,19 @@
         </a>
         <nav class="navi">
             <ul class="navi-list">
-<!--                <div th:text="${dto.user.id}">아이디정보</div>-->
 
 
-<!--            <div sec:authentication="principal.user.id" var="id">Bob</div>-->
-<!--                <div th:text="${dto.user.id}">아이디정보</div>-->
+<!--                <b>Authenticated DTO:</b>-->
+<!--                <div sec:authentication="principal.user.id">id</div>-->
+
+<!--                <div th:text="${dto.user.id}">아이디</div>-->
 
 
+            <div sec:authentication="principal.user.id" var="id">Bob</div>
+                <div class=container th:with="userinfo = ${#authorization.expression('principal.user.id')}"></div>
+                <div th:text="${userinfo}">아이디정보</div>
+
+<!--                <div sec:authentication="name"/>-->
                 <li class="navi-item" ><a href="/">
                     <i class="fas fa-home"></i>
                 </a></li>
@@ -53,7 +59,7 @@
                     <i class="far fa-compass"></i>
                 </a></li>
                 <li class="navi-item">
-                    <a href="/user/1" th:href="@{/user/1} ">
+                    <a href="/user/1" th:href="@{/user/1}">
                     <i class="far fa-user"></i>
                     </a>
                 </li>

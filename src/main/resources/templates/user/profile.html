@@ -32,12 +32,18 @@
           <button class="cta" onclick="location.href='/image/upload'">사진등록</button>
         </div>
         <div th:if ="${dto.pageOwnerState == false}">
+
           <div th:if="${dto.followState == true}">
-            <button class="cta blue" th:onclick="toggleSubscribe([[${dto.user.id}]], this)">팔로우 취소</button>
+            <button class="cta blue" th:attr="onclick =|toggleSubscribe('${dto.user.id}', this)|">팔로우취소</button>
+
+            <!--            <button class="cta blue" th:onclick="toggleSubscribe([[${dto.user.id}]], this)">팔로우 취소</button>-->
           </div>
           <div th:if="${dto.followState == false}">
-            <button class="cta" th:onclick="toggleSubscribe([[${dto.user.id}]],this)">팔로우</button>
+            <button class="cta blue" th:attr="onclick =|toggleSubscribe('${dto.user.id}', this)|">팔로우</button>
+
+            <!--            <button class="cta" th:onclick="toggleSubscribe([[${dto.user.id}]],this)">팔로우</button>-->
           </div>
+
         </div>
 
         <button class="modi" onclick="popup('.modal-info')">
@@ -49,8 +55,19 @@
         <ul>
           <li><a href=""> 게시물<span th:text="${dto.imageCount}">3</span>
           </a></li>
-          <li><a href="javascript:subscribeInfoModalOpen();"> 팔로우정보<span th:text="${dto.followCount} ">2</span>
-          </a></li>
+          <script  th:inline="javascript">
+            /*<![CDATA[*/
+            var id = "[[${dto.user.id}]]";
+            /*]]>*/
+          </script>
+
+          <li>
+            <a href="javascript:subscribeInfoModalOpen(id);">
+              팔로우정보<span th:text="${dto.followCount} ">2</span>
+            </a>
+          </li>
+
+
         </ul>
       </div>
       <div class="state">
@@ -77,8 +94,11 @@
           <div class="img-box">
             <a href="">
 
-              <img src="/images/home.jpg"
-                   th:src="|${@environment.getProperty('file.path')}${image.postImageUrl}|"/>
+
+              <img src="/upload/0e5ecbef-d3e3-4c85-8bed-4a3bf56aa2df_dog1.jpg"
+                                 th:src="|/upload/${image.postImageUrl}|"/>
+
+              <!--                   th:src="|${@environment.getProperty('file.path')}${image.postImageUrl}|"/>-->
 
 
 <!--                   th:src="|/upload/${image.postImageUrl}|"/>-->
@@ -134,30 +154,8 @@
 
     <div class="subscribe-list" id="subscribeModalList">
 
-      <div class="subscribe__item" id="subscribeModalItem-1">
-        <div class="subscribe__img">
-          <img src="#" onerror="this.src='/images/person.jpeg'"/>
-        </div>
-        <div class="subscribe__text">
-          <h2>love</h2>
-        </div>
-        <div class="subscribe__btn">
-          <button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
-        </div>
-      </div>
 
 
-      <div class="subscribe__item" id="subscribeModalItem-2">
-        <div class="subscribe__img">
-          <img src="#" onerror="this.src='/images/person.jpeg'"/>
-        </div>
-        <div class="subscribe__text">
-          <h2>ssar</h2>
-        </div>
-        <div class="subscribe__btn">
-          <button class="cta blue" onclick="toggleSubscribeModal(this)">팔로우취소</button>
-        </div>
-      </div>
 
     </div>
   </div>

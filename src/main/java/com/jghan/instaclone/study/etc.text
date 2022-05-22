@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**").authenticated() //인증이 필요한 url
+            .antMatchers("/", "/user/**", "/image/**", "/follow/**", "/comment/**").authenticated() //인증이 필요한 url
             .anyRequest().permitAll(); //어떤 요청이라도 허용.
 //        .and()
 //                .formLogin()
@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //        http
 //                .authorizeRequests()
-//                .antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**").authenticated() //인증이 필요한 url
+//                .antMatchers("/", "/user/**", "/image/**", "/follow/**", "/comment/**").authenticated() //인증이 필요한 url
 //                .anyRequest().permitAll(); //어떤 요청이라도 허용.
 //
 
