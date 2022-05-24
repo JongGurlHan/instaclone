@@ -26,7 +26,7 @@ public class Image {
 
     @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId") // DB컬럼명 설정
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     //이미지 좋아요 정보
