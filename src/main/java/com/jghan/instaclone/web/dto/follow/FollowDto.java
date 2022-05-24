@@ -19,5 +19,4 @@ public class FollowDto {
     private Integer followState; //팔로우 여부
     private Integer equalUserState; //로그인한 유저와 팔로우중인 유저가 같은지
 
-
 }

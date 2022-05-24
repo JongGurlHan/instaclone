@@ -60,7 +60,6 @@ function subscribeInfoModalOpen(pageUserId) {
 
         	});
 
-
 	}).fail(error=>{
 	    console.log("구독정보 불러오기 오류", error);
 

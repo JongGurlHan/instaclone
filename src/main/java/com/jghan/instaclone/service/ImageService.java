@@ -7,16 +7,25 @@ import com.jghan.instaclone.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
 public class ImageService {
+
+    @Transactional(readOnly = true)
+    public List<Image>imageStory(int principalId){
+        List<Image> images = imageRepository.mStory(principalId);
+
+        return images;
+    }
+
 
     @Value("${file.path}") //application.properties에서 가져옴
     private String uploadFolder;

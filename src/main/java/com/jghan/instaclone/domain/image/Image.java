@@ -1,5 +1,6 @@
 package com.jghan.instaclone.domain.image;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jghan.instaclone.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ public class Image {
     private String caption;
     private String postImageUrl; //-Db에 그 저장될 이미지 명
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId") // DB컬럼명 설정
     @ManyToOne
     private User user;

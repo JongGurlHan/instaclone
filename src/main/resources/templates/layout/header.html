@@ -41,14 +41,10 @@
             <ul class="navi-list">
 
 
-<!--                <b>Authenticated DTO:</b>-->
-<!--                <div sec:authentication="principal.user.id">id</div>-->
-
-<!--                <div th:text="${dto.user.id}">아이디</div>-->
+                <div sec:authentication="principal.user.id">id</div>
 
 
-            <div sec:authentication="principal.user.id" var="id">Bob</div>
-                <div class=container th:with="userinfo = ${#authorization.expression('principal.user.id')}"></div>
+
                 <div th:text="${userinfo}">아이디정보</div>
 
 <!--                <div sec:authentication="name"/>-->
@@ -59,8 +55,10 @@
                     <i class="far fa-compass"></i>
                 </a></li>
                 <li class="navi-item">
-                    <a href="/user/1" th:href="@{/user/1}">
-                    <i class="far fa-user"></i>
+                    <a  href="/user/1" th:href="@{|/user/${#authentication.principal.user.id}|}" />
+
+
+                        <i class="far fa-user"></i>
                     </a>
                 </li>
             </ul>
