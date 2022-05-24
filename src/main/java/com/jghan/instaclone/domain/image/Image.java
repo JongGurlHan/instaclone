@@ -1,6 +1,7 @@
 package com.jghan.instaclone.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jghan.instaclone.domain.likes.Likes;
 import com.jghan.instaclone.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -30,10 +32,20 @@ public class Image {
     private User user;
 
     //이미지 좋아요 정보
-
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image") //lazy가 기본
+    private List<Likes>likes;
     //댓글
 
     private LocalDateTime createDate;
+
+    @Transient //DB에 컬럼이 만들어지지 않는다.
+    private boolean likeState;
+
+    @Transient
+    private int likeCount;
+
+
 
     @PrePersist
     public void createDate(){
