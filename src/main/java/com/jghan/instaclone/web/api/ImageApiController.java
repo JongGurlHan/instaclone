@@ -5,6 +5,9 @@ import com.jghan.instaclone.domain.image.Image;
 import com.jghan.instaclone.service.ImageService;
 import com.jghan.instaclone.web.dto.CMRespDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +23,8 @@ public class ImageApiController {
     private final ImageService imageService;
 
     @GetMapping("/api/image")
-    public ResponseEntity<?>imageStory(@AuthenticationPrincipal PrincipalDetails principalDetails){
+    public ResponseEntity<?>imageStory(@AuthenticationPrincipal PrincipalDetails principalDetails
+    ){
         List<Image> images = imageService.imageStory(principalDetails.getUser().getId());
 
         return new ResponseEntity<>(new CMRespDto<>(1, "성공", images), HttpStatus.OK);

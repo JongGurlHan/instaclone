@@ -6,6 +6,8 @@ import com.jghan.instaclone.domain.image.ImageRepository;
 import com.jghan.instaclone.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,9 @@ import java.util.UUID;
 @Service
 public class ImageService {
 
+    private final ImageRepository imageRepository;
+
+
     @Transactional(readOnly = true)
     public List<Image>imageStory(int principalId){
         List<Image> images = imageRepository.mStory(principalId);
@@ -30,7 +35,6 @@ public class ImageService {
     @Value("${file.path}") //application.properties에서 가져옴
     private String uploadFolder;
 
-    private final ImageRepository imageRepository;
 
     @Transactional
     public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails){
