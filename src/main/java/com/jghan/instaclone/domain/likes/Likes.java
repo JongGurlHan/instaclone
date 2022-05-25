@@ -1,5 +1,6 @@
 package com.jghan.instaclone.domain.likes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jghan.instaclone.domain.image.Image;
 import com.jghan.instaclone.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class Likes { //N
     @ManyToOne //기본 패치전략은 EAGER
     private Image image; // 1
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name="userId")
     @ManyToOne
     private User user; //1

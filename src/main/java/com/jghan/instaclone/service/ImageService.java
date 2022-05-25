@@ -23,6 +23,14 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
+    @Transactional(readOnly = true)
+    public List<Image>popularImg(){
+
+        return imageRepository.mPopular();
+
+
+    }
+
 
     @Transactional(readOnly = true)
     public List<Image>imageStory(int principalId){

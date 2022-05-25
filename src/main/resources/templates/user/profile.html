@@ -108,7 +108,7 @@
               <!--                   th:src="'file:///'+ ${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>-->
             </a>
             <div class="comment">
-              <a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
+              <a href="#" class=""> <i class="fas fa-heart"></i><span th:text="${image.likeCount}">999</span>
               </a>
             </div>
           </div>

@@ -41,6 +41,11 @@ public class UserService {
         dto.setFollowState(followState == 1);
         dto.setFollowCount(followCount);
 
+        //좋아요 카운트 추가하기
+        userEntity.getImages().forEach((image) -> {
+            image.setLikeCount(image.getLikes().size());
+        });
+
 
         return dto;
     }
