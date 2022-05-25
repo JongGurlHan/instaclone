@@ -1,6 +1,7 @@
 package com.jghan.instaclone.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jghan.instaclone.domain.comment.Comment;
 import com.jghan.instaclone.domain.likes.Likes;
 import com.jghan.instaclone.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -35,7 +36,11 @@ public class Image {
     @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image") //lazy가 기본
     private List<Likes>likes;
+
     //댓글
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Comment>comments;
 
     private LocalDateTime createDate;
 
