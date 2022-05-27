@@ -43,27 +43,14 @@ public class AuthController {
     @PostMapping("/auth/signup")
     public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { //key=value (x-www-form-urlencoded)
 
-        //프론트 단에서 유효성 검사해도 postman 전송할 수 있으니까
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-
-            }
-            throw new CustomValidationException("유효성 검사 실패함", errorMap);
-        } else {
             log.info(signupDto.toString());
 
             //User < - SingupDto
             User user = signupDto.toEntity();
-            User userEntity = authService.register(user);
-            System.out.println(userEntity);
+            authService.register(user);
             log.info(user.toString());
 
             return "auth/signin";
-        }
-
 
     }
 
