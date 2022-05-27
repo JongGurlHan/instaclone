@@ -7,6 +7,10 @@
 	(5) 댓글삭제
  */
 
+//(0) 현재 로긴한 사용자 아이디
+let principalId = $("#principalId").val();
+//alert(principalId);
+
 // (1) 스토리 로드하기
 function storyLoad() {
     $.ajax({
@@ -15,6 +19,8 @@ function storyLoad() {
     }).done(res=>{
         console.log(res);
         res.data.forEach((image) => {
+
+              console.log(image);
             let storyItem = getStoryItem(image)
             $("#storyList").append(storyItem);
 
@@ -29,7 +35,9 @@ storyLoad();
 
 function getStoryItem(image) {
     let item =
-    `<div class="story-list__item">
+    `
+
+    <div class="story-list__item">
          <div class="sl__item__header">
              <div>
                  <img class="profile-image" th:src="/upload/${image.user.profileImageUrl}"
@@ -64,18 +72,47 @@ function getStoryItem(image) {
                  <p>${image.caption}</p>
              </div>
 
+
              <div id="storyCommentList-${image.id}">`;
 
+//
+//          for (var i = 0; i < image.comments.length; i++) {
+//                 item +=
+//                                     `<div class="sl__item__contents__comment" id="storyCommentItem-${image.comments[i].id}">
+//                                     <p>
+//                                         <b> ${image.comments[i].createDate} :</b> ${image.comments[i].content}
+//
+//                                     </p>`;
+//
+//                                     item +=`
+//                                 </div>`;
+//
+//           };
+
+//                for (var i = 0; i < image.comments.length; i++) {
+//                        <b> ${image.comments[i].createDate} :</b> ${image.comments[i].content}
+
+
                 image.comments.forEach((comment)=>{
-                    item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+
+                    item +=
+                    `
+
+                    <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
                     <p>
-                        <b> ${comment} :</b> ${comment.content}
-                    </p>
+                    	<b>댓글내용 :</b> ${comment.content}
+                    </p>`;
 
-                    <button onclick="deleteComment(${comment.id})">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    if(principalId){
+                        item += `<button onclick="deleteComment(${comment.id})">
+                                  <i class="fas fa-times"></i>
+                                 </button>`;
+                    }
 
+
+
+
+                    item +=`
                 </div>`;
 
                 });
@@ -151,8 +188,6 @@ function toggleLike(imageId) {
 // (4) 댓글쓰기
 function addComment(imageId) {
 
-
-
 	let commentInput = $(`#storyCommentInput-${imageId}`);
 
    	let commentList = $(`#storyCommentList-${imageId}`);
@@ -163,7 +198,6 @@ function addComment(imageId) {
     };
 
 
-
 	if (data.content === "") {
 		alert("댓글을 작성해주세요!");
 		return;
@@ -172,9 +206,9 @@ function addComment(imageId) {
 	$.ajax({
 	    type:"post",
 	    url:"/api/comment",
-	    data:JSON.stringify(data),
+	    data:JSON.stringify(data), //js데이터를 json으로 변환
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json" //응답받을 data타입
 	}).done(res=>{
 	    console.log("성공", res);
 
@@ -186,9 +220,10 @@ function addComment(imageId) {
               <b>${comment.user.username} :</b>
               ${comment.content}
             </p>
-            <button><i class="fas fa-times"></i></button>
+            <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
           </div>
         `;
+
         commentList.prepend(content);
 	}).fail(error=>{
 	    console.log("오류", error);
@@ -198,7 +233,18 @@ function addComment(imageId) {
 }
 
 // (5) 댓글 삭제
-function deleteComment() {
+function deleteComment(commentId) {
+
+    $.ajax({
+        type:"delete",
+        url:`/api/comment/${commentId}`,
+        dataType:"json"
+    }).done(res=>{
+        console.log("성공", res);
+        $(`#storyCommentItem-${commentId}`).remove();
+    }).fail(error=>{
+        console.log("오류", error);
+    });
 
 }
 

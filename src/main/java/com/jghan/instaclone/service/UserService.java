@@ -39,6 +39,7 @@ public class UserService {
         System.out.println("이미지 파일이름 : "+imageFileName);
 
         Path imageFilePath = Paths.get(uploadFolder+imageFileName);
+        String testPath = imageFilePath.toString();
 
         // 통신, I/O -> 예외가 발생할 수 있다.
         try {
@@ -51,7 +52,9 @@ public class UserService {
             // throw -> return 으로 변경
             return new CustomApiException("유저를 찾을 수 없습니다.");
         });
-        userEntity.setProfileImageUrl(imageFileName);
+
+        userEntity.setProfileImageUrl(testPath);
+
 
         return userEntity;
 
@@ -82,7 +85,7 @@ public class UserService {
         dto.setFollowState(followState == 1);
         dto.setFollowCount(followCount);
 
-        //좋아요 카운트 추가하기
+        //좋아요 카운트 추가하기 - dto내부의 userEntity 수정
         userEntity.getImages().forEach((image) -> {
             image.setLikeCount(image.getLikes().size());
         });

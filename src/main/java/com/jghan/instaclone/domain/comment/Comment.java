@@ -1,5 +1,6 @@
 package com.jghan.instaclone.domain.comment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jghan.instaclone.domain.image.Image;
 import com.jghan.instaclone.domain.user.User;
@@ -31,7 +32,7 @@ public class Comment {
     private User user;
 
     @JoinColumn(name = "imageId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Image image;
 
 

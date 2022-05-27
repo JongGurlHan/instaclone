@@ -38,6 +38,7 @@ public class Image {
     private List<Likes>likes;
 
     //댓글
+    @OrderBy("id DESC")
     @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Comment>comments;
@@ -50,21 +51,10 @@ public class Image {
     @Transient
     private int likeCount;
 
-
-
     @PrePersist
     public void createDate(){
         this.createDate = LocalDateTime.now();
     }
 
-// 오브젝트를 콘솔에 출력할 때 문제가 될 수 있어서 User부분을 출력되지 않게 함(무한참조 방지위해서)
-//    @Override
-//    public String toString() {
-//        return "Image{" +
-//                "id=" + id +
-//                ", caption='" + caption + '\'' +
-//                ", postImageUrl='" + postImageUrl + '\'' +
-//                ", createDate=" + createDate +
-//                '}';
-//    }
+
 }

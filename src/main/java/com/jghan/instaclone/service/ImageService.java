@@ -27,8 +27,6 @@ public class ImageService {
     public List<Image>popularImg(){
 
         return imageRepository.mPopular();
-
-
     }
 
 
