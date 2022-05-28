@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //번호증가 전략이 db를 따라감
     private int id;
 
-    @Column(length = 20, unique = true)
+    @Column(length = 100, unique = true) //Oauth2로그인을 위해 컬럼 늘리기
     private String username;
     @Column(nullable = false)
     private String password;

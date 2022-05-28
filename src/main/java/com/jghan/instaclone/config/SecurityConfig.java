@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 @EnableWebSecurity
-@Configuration //IOC
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final OAuth2DetailsService oAuth2DetailsService;
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/") //로그인 정상됐을때 이동하는 url
                 .and()
                 .oauth2Login()// form 로그인도 하는데, oauth2로그인도 할꺼야
-                .userInfoEndpoint() // oauth2로그인을 한다면 최종응답으로 회원정보를 바로 받을 수 있다. / code받고 access토큰 받는 과정을 신경안써도 된다.
+                .userInfoEndpoint() // oauth2로그인을 한다면 최종응답으로 회원정보(email, public_profile)를 바로 받을 수 있다. / code받고 access토큰 받는 과정을 신경안써도 된다.
                 .userService(oAuth2DetailsService);
     }
 }
