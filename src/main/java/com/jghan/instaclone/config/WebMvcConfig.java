@@ -18,11 +18,28 @@ public class WebMvcConfig implements WebMvcConfigurer { //web 설정파일
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
 
+        //file:///C:/workspace/springbootwork/upload/
         registry
-                .addResourceHandler("/upload/**") // html에서 upload/** 이런 주소패턴이 나오면 발동
-                .addResourceLocations("file///"+uploadFolder)
-                .setCachePeriod(60*10*6) //1시간
+                .addResourceHandler("/image/**") //  /upload/** 이런 주소 패턴이 나오면 발동
+                .addResourceLocations("file:///"+uploadFolder)
+                .setCachePeriod(60*10*6) // 1시간
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
     }
 }
+
+
+
+
+//@Configuration
+//@EnableScheduling
+//@EnableTransactionManagement
+//public class WebMvcConfig implements WebMvcConfigurer {
+//
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/image/**")
+//                .addResourceLocations("file:/home/ubuntu/file-path")
+//                .setCachePeriod(20);
+//    }
+//}

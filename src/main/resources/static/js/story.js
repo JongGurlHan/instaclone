@@ -40,14 +40,16 @@ function getStoryItem(image) {
     <div class="story-list__item">
          <div class="sl__item__header">
              <div>
-                 <img class="profile-image" th:src="/upload/${image.user.profileImageUrl}"
+                 <img class="profile-image" src="/image/${image.user.profileImageUrl}"
                       onerror="this.src='/images/person.jpeg'" />
+
              </div>
              <div>${image.user.username}</div>
+
          </div>
 
          <div class="sl__item__img">
-             <img src="/${image.postImageUrl}" />
+             <img src="/image/${image.postImageUrl}" />
          </div>
 
          <div class="sl__item__contents">
@@ -74,24 +76,6 @@ function getStoryItem(image) {
 
 
              <div id="storyCommentList-${image.id}">`;
-
-//
-//          for (var i = 0; i < image.comments.length; i++) {
-//                 item +=
-//                                     `<div class="sl__item__contents__comment" id="storyCommentItem-${image.comments[i].id}">
-//                                     <p>
-//                                         <b> ${image.comments[i].createDate} :</b> ${image.comments[i].content}
-//
-//                                     </p>`;
-//
-//                                     item +=`
-//                                 </div>`;
-//
-//           };
-
-//                for (var i = 0; i < image.comments.length; i++) {
-//                        <b> ${image.comments[i].createDate} :</b> ${image.comments[i].content}
-
 
                 image.comments.forEach((comment)=>{
 

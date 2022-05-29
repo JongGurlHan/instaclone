@@ -1,6 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!--<%@ include file="../layout/header.jsp"%>-->
 <div th:replace="layout/header" :: menu />
 
 <!--프로필 섹션-->
@@ -18,7 +17,7 @@
                  id="userProfileImageInput" />
         </form>
 
-        <img class="profile-image" src="" th:src="${dto.user.profileImageUrl}"
+        <img class="profile-image" src="/image/${dto.user.profileImageUrl}"  th:src="@{|/image/${dto.user.profileImageUrl}|}"
              onerror="this.src='/images/person.jpeg'" id="userProfileImage" />
       </div>
     </div>
@@ -95,21 +94,12 @@
           <div class="img-box">
             <a href="">
 
-              <div th:text="|file://${@environment.getProperty('file.path')}${image.postImageUrl}|"> </div>
-              <img src="upload/75bfa3b6-44ed-4233-85bb-565b690ea853_dog2.jpg"></img>
+              <img src="/filepath/4cbe394f-e018-4dd0-a509-f0724efe41c4_dog2.jpg"
+              th:src="@{|/image/${image.postImageUrl}|}"/>
 
-              <img src="/filepath/e9463d4a-c97d-40cb-a330-0616735be5e1_dog2.jpg"
-                   th:src="@{/upload/123.jpg}" />
-<!--                   th:src="|file:///${@environment.getProperty('file.path')}${image.postImageUrl}|" />-->
-
-
-<!--                   th:src="|/upload/${image.postImageUrl}|"/>-->
-<!--                   th:src="|/upload/${image.postImageUrl}|"/>-->
 <!--                   th:src="|${@environment.getProperty('file.path')}${image.postImageUrl}|"/>-->
 <!--                   th:src="${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>-->
-              <!--                   th:src="${@environment.getProperty('file.path')}+${image.postImageUrl}"/>-->
 
-              <!--                   th:src="'file:///'+ ${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>-->
             </a>
             <div class="comment">
               <a href="#" class=""> <i class="fas fa-heart"></i><span th:text="${image.likeCount}">999</span>
@@ -165,4 +155,4 @@
 
 <script src="/js/profile.js"></script>
 
-<!--<%@ include file="../layout/footer.jsp"%>-->
+<div th:replace="layout/footer" :: footer />

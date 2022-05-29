@@ -39,7 +39,6 @@ public class UserService {
         System.out.println("이미지 파일이름 : "+imageFileName);
 
         Path imageFilePath = Paths.get(uploadFolder+imageFileName);
-        String testPath = imageFilePath.toString();
 
         // 통신, I/O -> 예외가 발생할 수 있다.
         try {
@@ -53,7 +52,7 @@ public class UserService {
             return new CustomApiException("유저를 찾을 수 없습니다.");
         });
 
-        userEntity.setProfileImageUrl(testPath);
+        userEntity.setProfileImageUrl(imageFileName);
 
 
         return userEntity;
