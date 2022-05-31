@@ -1,6 +1,7 @@
 package com.jghan.instaclone.web;
 
 import com.jghan.instaclone.domain.user.User;
+import com.jghan.instaclone.handler.ex.CustomValidationApiException;
 import com.jghan.instaclone.handler.ex.CustomValidationException;
 import com.jghan.instaclone.service.AuthService;
 import com.jghan.instaclone.web.dto.auth.SignupDto;
@@ -43,6 +44,16 @@ public class AuthController {
     @PostMapping("/auth/signup")
     public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { //key=value (x-www-form-urlencoded)
 
+//
+//        if (bindingResult.hasErrors()) {
+//            Map<String, String> errorMap = new HashMap<>();
+//
+//            for (FieldError error : bindingResult.getFieldErrors()) {
+//                errorMap.put(error.getField(), error.getDefaultMessage());
+//
+//            }
+//            throw new CustomValidationException("유효성 검사 실패함", errorMap);
+//        }
             log.info(signupDto.toString());
 
             //User < - SingupDto

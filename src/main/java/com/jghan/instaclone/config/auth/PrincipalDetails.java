@@ -34,13 +34,6 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         collector.add(() -> { return user.getRole();});
         return collector;
 
-//        collector.add(new GrantedAuthority() {
-//            @Override
-//            public String getAuthority() {
-//                return user.getRole();
-//            }
-//        });
-
     }
 
     @Override

@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice //모든 Exception들을 낚아챔
 public class ControllerExceptionHandler {
 
-    //js리턴 - client 용
-    //CMRespDto는 전역적으로 쓸거라서 제네릭으로 선언
+    //js리턴 - client한테 응답
     @ExceptionHandler(CustomValidationException.class) //CustomValidationException 발동하는 모든 Exception을 이 함수가 가로챔
     public String validationException(CustomValidationException e){
         if(e.getErrorMap() ==null){
@@ -27,14 +26,15 @@ public class ControllerExceptionHandler {
         }
     }
 
-    @ExceptionHandler(CustomException.class) //CustomValidationException 발동하는 모든 Exception을 이 함수가 가로챔
+    @ExceptionHandler(CustomException.class)
     public String exception(CustomException e){
        return  Script.back(e.getMessage());
     }
 
-    //object리턴 - api통신때
-    @ExceptionHandler(CustomValidationApiException.class)
+    //CMRespDto는 전역적으로 쓸거라서 제네릭으로 선언
+    //object리턴 - api(ajax)통신때
     //ajax통신할때는 ResponseEntity를 사용해야지 http 상태코드를 전달할 수 있다. 그래서 분기하기가 쉽다.
+    @ExceptionHandler(CustomValidationApiException.class)
     public ResponseEntity<?> validationApiException(CustomValidationApiException e){
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
     }

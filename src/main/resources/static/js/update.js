@@ -2,7 +2,7 @@
 
 function update(userId, event) {
 
-    event.preventDefault(); //폼태그 액션을 막기
+    console.log('이벤트정보:', event);
 
     //form의 profileUpdate테그를 찾아서 그 폼테그가 들고 있는 정보를 시리얼라이즈
     let data = $("#profileUpdate").serialize();
@@ -26,6 +26,5 @@ function update(userId, event) {
            alert(JSON.stringify(error.responseJSON.data));
            }
     });
-
 
 }
