@@ -1,6 +1,7 @@
 // (1) 회원정보 수정
 
 function update(userId, event) {
+    event.preventDefault();
 
     console.log('이벤트정보:', event);
 
@@ -14,7 +15,7 @@ function update(userId, event) {
         data: data,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "json"
-    }).done(res =>{ //Http상태코드 200번대
+    }).done(res =>{ //Http상태코드 200번대 done이 뜬다.
         console.log("update 성공", res);
         alert("update 성공");
         location.href = `/user/${userId}`;
@@ -23,7 +24,7 @@ function update(userId, event) {
            alert(error.responseJSON.message);
        }else{
            //json object를 Json 문자열로 변환
-           alert(JSON.stringify(error.responseJSON.data));
+           alert( );
            }
     });
 

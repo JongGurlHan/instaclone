@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Table(
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "follow_uk",
+                        name = "follow_uk", //제약조건 이름
                         columnNames = {"fromUserId", "toUserId"} //실제 db이 컬럼명이 들어가야한다.
                 )
         }

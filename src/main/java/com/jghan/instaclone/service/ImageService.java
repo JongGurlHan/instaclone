@@ -57,7 +57,6 @@ public class ImageService {
     @Value("${file.path}") //application.properties에서 가져옴
     private String uploadFolder;
 
-
     @Transactional
     public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails){
 
