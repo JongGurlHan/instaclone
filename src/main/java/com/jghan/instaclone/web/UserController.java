@@ -30,6 +30,8 @@ public class UserController {
     @GetMapping({"/user/{id}/update"})
     public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
 
+
+
         //principal: 인증주체, 인증된 사람의 오브젝트명
         model.addAttribute("principal", principalDetails.getUser());
         return "user/update";

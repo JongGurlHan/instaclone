@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer { //web 설정파일
 
         //file:///C:/workspace/springbootwork/upload/
         registry
-                .addResourceHandler("/image/**") //  /upload/** 이런 주소 패턴이 나오면 발동
+                .addResourceHandler("/image/**") //  /image/** 이런 주소 패턴이 나오면 발동
                 .addResourceLocations("file:///"+uploadFolder)
                 .setCachePeriod(60*10*6) // 1시간
                 .resourceChain(true)
