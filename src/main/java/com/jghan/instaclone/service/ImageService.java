@@ -54,6 +54,8 @@ public class ImageService {
        return images;
     }
 
+    //
+
 
     @Value("${file.path}") //application.properties에서 가져옴
     private String uploadFolder;
