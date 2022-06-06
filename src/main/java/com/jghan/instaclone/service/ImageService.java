@@ -34,10 +34,11 @@ public class ImageService {
     public List<Image>imageStory(int principalId){
         List<Image> images = imageRepository.mStory(principalId);
 
+        //images에 좋아요 상태 탐기기
+
         //2로 로그인 -> 2가 팔로우한 계정의 이미지롤 for문으로 모두 가져오기
         //-> 각 이미지의 좋아요 정보를 모두 가져와서
         //-> 그 좋아요가 내가 좋아요 한지 판별하기(image의 like정보의 user와 principalId가 같은지 보기)
-        //images에 좋아요 상태 탐기기
         images.forEach((image)->{
 
             image.setLikeCount(image.getLikes().size());

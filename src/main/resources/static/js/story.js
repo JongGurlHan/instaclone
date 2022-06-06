@@ -93,9 +93,6 @@ function getStoryItem(image) {
                                  </button>`;
                     }
 
-
-
-
                     item +=`
                 </div>`;
 
@@ -129,7 +126,6 @@ function toggleLike(imageId) {
 	let likeIcon = $(`#storyLikeIcon-${imageId}`);
 
 	if (likeIcon.hasClass("far")) { //빈하트-> LIKE하겠다
-
 	    $.ajax({
         			type: "post",
         			url: `/api/image/${imageId}/likes`,
@@ -148,7 +144,6 @@ function toggleLike(imageId) {
         		});
 
 	} else {  //빨간하트 ->UNLIKE 하겠다.
-
 	     $.ajax({
          			type: "delete",
          			url: `/api/image/${imageId}/likes`,
@@ -165,7 +160,6 @@ function toggleLike(imageId) {
          		}).fail(error=>{
          			console.log("오류", error);
          		});
-
 	}
 }
 

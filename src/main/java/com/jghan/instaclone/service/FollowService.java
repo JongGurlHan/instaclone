@@ -38,22 +38,18 @@ public class FollowService {
                 .setParameter(1, principalId)
                 .setParameter(2, principalId)
                 .setParameter(3, pageUserId);
-
         //1.물음표: principalId
         //2.물음표  :principalId
         //3. 물음표 :pageUserId
 
         //qlrm: db에서 result된 결과를 자바클래스에 매핑해주는 라이브러리
         //내가 리턴받을 결과가 모델이아닌, 새로운 조합의 데이터면, dto라면 네이티브쿼리를 써야한다. jpa 못쓴다.
-
         //쿼리 실행(qlrm 라이브러리 필요, dto에 db결과를 매핑하기 위해서)
         JpaResultMapper result = new JpaResultMapper();
         List<FollowDto> followDtos = result.list(query, FollowDto.class);//한건을 받을게 아니니까
-
         //(쿼리, 리턴받을 타입)
 
         return  followDtos;
-
     }
 
     @Transactional

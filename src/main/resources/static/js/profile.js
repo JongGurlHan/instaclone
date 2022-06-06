@@ -55,12 +55,10 @@ function subscribeInfoModalOpen(pageUserId) {
 	     res.data.forEach((u) => {
             let item = getSubscribeModalItem(u);
             $("#subscribeModalList").append(item);
-
         	});
 
 	}).fail(error=>{
 	    console.log("구독정보 불러오기 오류", error);
-
 	});
 }
 
