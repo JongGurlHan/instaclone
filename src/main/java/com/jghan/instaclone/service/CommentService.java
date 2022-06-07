@@ -39,9 +39,7 @@ public class CommentService {
         comment.setImage(image);
         comment.setUser(userEntity);
 
-
         return commentRepository.save(comment);
-
     }
 
     @Transactional
@@ -51,7 +49,6 @@ public class CommentService {
         }catch (Exception e){
             throw new CustomApiException(e.getMessage());
         }
-
     }
 
 }

@@ -54,9 +54,7 @@ public class UserService {
 
         userEntity.setProfileImageUrl(imageFileName);
 
-
         return userEntity;
-
     }
 
 

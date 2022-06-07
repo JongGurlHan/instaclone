@@ -146,15 +146,10 @@ function getSubscribeModalItem(u) {
 
 
 function profileImageUpload(pageUserId, principalId) {
-
-	//console.log("pageUserId", pageUserId);
-	//console.log("principalId", principalId);
-
 	if(pageUserId != principalId){
 		alert("프로필 사진을 수정할 수 없는 유저입니다.");
 		return;
 	}
-
 	$("#userProfileImageInput").click();
 
 	$("#userProfileImageInput").on("change", (e) => {
@@ -164,7 +159,6 @@ function profileImageUpload(pageUserId, principalId) {
 			alert("이미지를 등록해야 합니다.");
 			return;
 		}
-
 		// 서버에 이미지를 전송
 		let profileImageForm = $("#userProfileImageForm")[0];
 		console.log(profileImageForm);
@@ -190,8 +184,6 @@ function profileImageUpload(pageUserId, principalId) {
 		}).fail(error=>{
 			console.log("오류", error);
 		});
-
-
 	});
 }
 
