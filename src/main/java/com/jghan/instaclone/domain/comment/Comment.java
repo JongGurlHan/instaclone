@@ -26,9 +26,9 @@ public class Comment {
     @Column(length = 100, nullable = false)
     private String content;
 
-    @JsonIgnoreProperties("{images}")
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId")
-    @ManyToOne(fetch =FetchType.EAGER) //EAGER 가 디폴트 왜냐하면 1개 댓글에는 user나 image 정보가 1개뿐이라서 join해서 가져와도 db에 무리가 없다.
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @JoinColumn(name = "imageId")

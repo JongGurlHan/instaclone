@@ -81,10 +81,9 @@ function getStoryItem(image) {
 
                     item +=
                     `
-
                     <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
                     <p>
-                    	<b>댓글내용 :</b> ${comment.content}
+                    	<b>${comment.user.username} :</b> ${comment.content}
                     </p>`;
 
                     if(principalId){
@@ -92,19 +91,16 @@ function getStoryItem(image) {
                                   <i class="fas fa-times"></i>
                                  </button>`;
                     }
-
                     item +=`
                 </div>`;
 
                 });
-
-
             item += `
          </div>
 
          <div class="sl__item__input">
 			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
-             <button type="button" onClick="addComment(${image.id} )">게시</button>
+             <button type="button" onClick="addComment(${image.id})">게시</button>
          </div>
 
      </div>
