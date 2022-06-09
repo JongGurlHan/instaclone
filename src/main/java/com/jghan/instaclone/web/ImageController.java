@@ -42,16 +42,16 @@ public class ImageController {
         return "image/upload";
     }
 
-    @PostMapping("/image")
-    public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
-
-        if(imageUploadDto.getFile().isEmpty()){
-            throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
-        }
-        imageService.upload(imageUploadDto, principalDetails);
-
-        return "redirect:/user/"+principalDetails.getUser().getId();
-    }
+//    @PostMapping("/image")
+//    public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
+//
+//        if(imageUploadDto.getFile().isEmpty()){
+//            throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
+//        }
+//        imageService.upload(imageUploadDto, principalDetails);
+//
+//        return "redirect:/user/"+principalDetails.getUser().getId();
+//    }
 
     @PostMapping("/image_S3")
     public String imageUpload_S3(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
