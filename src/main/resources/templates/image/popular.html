@@ -14,7 +14,7 @@
             <tr th:each="image : ${images}">
 
                 <div class="p-img-box">
-                    <a href="/user/${image.user.id}" th:href="|/user/${image.user.id}|" >
+                    <a href="/user/${image.user.id}" th:href="|https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${image.user.id}|" >
                         <img src="/images/home.jpg" th:src="${image.postImageUrl}" />
                     </a>
                 </div>
