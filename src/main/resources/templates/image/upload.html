@@ -20,10 +20,11 @@
         <!--사진업로드 로고 end-->
 
         <!--사진업로드 Form-->
-        <form class="upload-form" th:action="@{/image}" method="post" enctype="multipart/form-data">
+<!--        <form class="upload-form" th:action="@{/image}" method="post" enctype="multipart/form-data">-->
+        <form class="upload-form" th:action="@{/image_S3}" method="post" enctype="multipart/form-data">
             <input type="file" name="file"  onchange="imageChoose(this)"/>
             <div class="upload-img">
-                <img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
+                <img src="/images/person.png" alt="" id="imageUploadPreview" />
             </div>
 
             <!--사진설명 + 업로드버튼-->

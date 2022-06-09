@@ -17,8 +17,9 @@
                  id="userProfileImageInput" />
         </form>
 
-        <img class="profile-image" src="/image/${dto.user.profileImageUrl}"  th:src="@{|/image/${dto.user.profileImageUrl}|}"
-             onerror="this.src='/images/person.jpeg'" id="userProfileImage" />
+<!--        <img class="profile-image" src="/image/${dto.user.profileImageUrl}"  th:src="@{|/image/${dto.user.profileImageUrl}|}"-->
+        <img class="profile-image" src="/image/${dto.user.profileImageUrl}"  th:src="@{|https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${dto.user.profileImageUrl}|}"
+             onerror="this.src='/images/person.png'" id="userProfileImage" />
       </div>
     </div>
     <!--유저이미지end-->
@@ -95,7 +96,8 @@
             <a href="">
 
               <img src="/4cbe394f-e018-4dd0-a509-f0724efe41c4_dog2.jpg"
-              th:src="@{|/image/${image.postImageUrl}|}"/>
+              th:src="@{|https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${image.postImageUrl}|}"/>
+<!--              th:src="@{|/image/${image.postImageUrl}|}"/>-->
 
 <!--                   th:src="|${@environment.getProperty('file.path')}${image.postImageUrl}|"/>-->
 <!--                   th:src="${@environment.getProperty('file.path')} + @{${image.postImageUrl}}"/>-->

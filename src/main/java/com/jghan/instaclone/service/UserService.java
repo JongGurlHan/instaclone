@@ -1,5 +1,12 @@
 package com.jghan.instaclone.service;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jghan.instaclone.domain.follow.FollowRepositoy;
 import com.jghan.instaclone.domain.user.User;
 import com.jghan.instaclone.domain.user.UserRepository;
@@ -14,10 +21,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
+
+
 
 
 @RequiredArgsConstructor
@@ -31,6 +41,30 @@ public class UserService {
     @Value("${file.path}") //application.properties에서 가져옴
     private String uploadFolder;
 
+    private AmazonS3 s3Client;
+
+    @Value("${cloud.aws.credentials.accessKey}")
+    private String accessKey;
+
+    @Value("${cloud.aws.credentials.secretKey}")
+    private String secretKey;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
+
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
+    @PostConstruct
+    public void setS3Client() {
+        AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
+
+        s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(this.region)
+                .build();
+    }
+
     @Transactional
     public User profileImageUrlUpdate(int principalId, MultipartFile profileImageFile){
 
@@ -40,9 +74,10 @@ public class UserService {
 
         Path imageFilePath = Paths.get(uploadFolder+imageFileName);
 
-        // 통신, I/O -> 예외가 발생할 수 있다.
+
         try {
-            Files.write(imageFilePath, profileImageFile.getBytes());
+            s3Client.putObject(new PutObjectRequest(bucket, imageFileName, profileImageFile.getInputStream(), null)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -53,5 +53,17 @@ public class ImageController {
         return "redirect:/user/"+principalDetails.getUser().getId();
     }
 
+    @PostMapping("/image_S3")
+    public String imageUpload_S3(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        if(imageUploadDto.getFile().isEmpty()){
+            throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
+        }
+        imageService.upload_S3(imageUploadDto, principalDetails);
+
+        return "redirect:/user/"+principalDetails.getUser().getId();
+    }
+
+
 
 }

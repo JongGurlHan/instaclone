@@ -1,5 +1,12 @@
 package com.jghan.instaclone.service;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.jghan.instaclone.config.auth.PrincipalDetails;
 import com.jghan.instaclone.domain.image.Image;
 import com.jghan.instaclone.domain.image.ImageRepository;
@@ -10,7 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -83,4 +93,61 @@ public class ImageService {
 //        System.out.println(imageEntity.toString());
 
     }
+
+    private AmazonS3 s3Client;
+
+    @Value("${cloud.aws.credentials.accessKey}")
+    private String accessKey;
+
+    @Value("${cloud.aws.credentials.secretKey}")
+    private String secretKey;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
+
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
+    @PostConstruct
+    public void setS3Client() {
+        AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
+
+        s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(this.region)
+                .build();
+    }
+
+    @Transactional
+    public void upload_S3(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails){
+
+        UUID uuid = UUID.randomUUID();
+        String imageFilename = uuid + "_"+ imageUploadDto.getFile().getOriginalFilename(); //db에 저장되는 파일명
+        System.out.println("이미지 파일이름: " + imageFilename);
+
+        Path imageFilePath = Paths.get(uploadFolder+imageFilename);
+
+        // 이미지 s3서버에 저장
+        try {
+//            Files.write(imageFilePath, imageUploadDto.getFile().getBytes()); //(파일 패스, 실제 이미지 파일)
+            s3Client.putObject(new PutObjectRequest(bucket, imageFilename, imageUploadDto.getFile().getInputStream(), null)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //Image db 테이블에 저장
+        Image image = imageUploadDto.toEntity(imageFilename, principalDetails.getUser());
+        imageRepository.save(image);
+
+
+    }
+
+//    public String upload(MultipartFile file) throws IOException {
+//        String fileName = file.getOriginalFilename();
+//
+//        s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
+//                .withCannedAcl(CannedAccessControlList.PublicRead));
+//        return s3Client.getUrl(bucket, fileName).toString();
+//    }
 }

@@ -33,11 +33,11 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
         Map<String, Object> userinfo = oAuth2User.getAttributes();
 
         String username = "facebook_"+(String) userinfo.get("id");
-        String password = new BCryptPasswordEncoder( ).encode(UUID.randomUUID().toString());
+        String password = new BCryptPasswordEncoder().encode(UUID.randomUUID().toString());
+//        String password = bCryptPasswordEncoder.encode(UUID.randomUUID().toString());
         String name = (String) userinfo.get("name");
         String email = (String) userinfo.get("email");
         //어차피 oauth는 username, password적어서 로그인하는거가 아니기 때문에 중복되지 않은 값만 넣어주도록 한다.
-
 
         //한번 oauth로 로그인으로 회원가입 진행해서 유저정보 저장됐다.
         // -> 근데 그 다음에 다시 페이스북 로그인하면 다시 한번 회원가입이 된다.

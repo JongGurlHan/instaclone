@@ -65,7 +65,8 @@ function subscribeInfoModalOpen(pageUserId) {
 function getSubscribeModalItem(u) {
     let item =`<div class="subscribe__item" id="subscribeModalItem-${u.id}">
                  <div class="subscribe__img">
-                   <img src="/image/${u.profileImageUrl}" onerror="this.src='/images/person.jpeg'"/>
+<!--                  <img src="/image/${u.profileImageUrl}" onerror="this.src='/images/person.png'"/> -->
+                   <img src="https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${u.profileImageUrl}" onerror="this.src='/images/person.png'"/>
                  </div>
                  <div class="subscribe__text">
                    <h2>${u.username}</h2>
@@ -88,60 +89,6 @@ function getSubscribeModalItem(u) {
 
 
 }
-
-
-//// (3) 유저 프로파일 사진 변경 (완)
-//function profileImageUpload(pageUserId, principalId) {
-//
-////	console.log("pageUserId", pageUserId);
-////	console.log("principalId", principalId);
-//    if(pageUserId != principalId){
-//		alert("프로필 사진을 수정할 수 없는 유저입니다.");
-//		return;
-//	}
-//
-//	$("#userProfileImageInput").click();
-//
-//
-//
-//	$("#userProfileImageInput").on("change", (e) => {
-//		let f = e.target.files[0];
-//
-//		if (!f.type.match("image.*")) {
-//			alert("이미지를 등록해야 합니다.");
-//			return;
-//		}
-//
-//		//서버에 이미지를 전송
-//		let profileImageForm = $("#userProfileImageForm")[0];
-//		console.log(profileImageForm);
-//
-//		//FormData객체를 이용하면 form태그의 필드와 그 값을 나타내는 일련의 key/value쌍을 담을 수 있다.
-//		let formData = new FormData(profileImageForm);
-//		$.ajax(
-//		    type: "put",
-//            url: `/api/user/${principalId}/profileImageUrl`,
-//            data: formData,
-//		    contentType: false, //필수:x-www-form-urlencoded로 파싱되는것을 방지
-//		    processData: false, // 필수:contentType: false 로줬을때 QueryString으로 자동 설정됨. 해제 필요
-//		    enctype: "multipart/form-data",
-//		    dataType:"json"
-//		).done(res=>{
-//            // 사진 전송 성공시 이미지 변경
-//            let reader = new FileReader();
-//            reader.onload = (e) => {
-//                $("#userProfileImage").attr("src", e.target.result);
-//            }
-//            reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
-//
-//		}).fail(error=>{
-//		    console.log("오류", error);
-//		})
-//	});
-//}
-//
-
-
 
 
 

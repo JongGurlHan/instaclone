@@ -25,6 +25,17 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         this.user = user;
     }
 
+    //=====Oauth 로그인=====
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes ; //{id=508xxxxxxxxxx, name=한xx, email=gxxxx@gmail.com}
+    }
+
+    @Override
+    public String getName() {
+        return (String)attributes.get("name");
+    }
+
 
     //권한이 1개가 이닐수 있어서 Collection타입
     @Override
@@ -66,14 +77,5 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         return true; //false면 로그인 안된다.
     }
 
-    //=====Oauth 로그인=====
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes ; //{id=508xxxxxxxxxx, name=한xx, email=gxxxx@gmail.com}
-    }
 
-    @Override
-    public String getName() {
-        return (String)attributes.get("name");
-    }
 }

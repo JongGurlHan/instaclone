@@ -40,8 +40,8 @@ function getStoryItem(image) {
     <div class="story-list__item">
          <div class="sl__item__header">
              <div>
-                 <img class="profile-image" src="/image/${image.user.profileImageUrl}"
-                      onerror="this.src='/images/person.jpeg'" />
+                 <img class="profile-image" src="https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${image.user.profileImageUrl}"
+                      onerror="this.src='/images/person.png'" />
 
              </div>
              <div>${image.user.username}</div>
@@ -49,7 +49,8 @@ function getStoryItem(image) {
          </div>
 
          <div class="sl__item__img">
-             <img src="/image/${image.postImageUrl}" />
+<!--            <img src="/image/${image.postImageUrl}" /> -->
+             <img src="https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${image.postImageUrl}" />
          </div>
 
          <div class="sl__item__contents">
@@ -86,7 +87,7 @@ function getStoryItem(image) {
                     	<b>${comment.user.username} :</b> ${comment.content}
                     </p>`;
 
-                    if(principalId){
+                    if(principalId == comment.user.id){
                         item += `<button onclick="deleteComment(${comment.id})">
                                   <i class="fas fa-times"></i>
                                  </button>`;
