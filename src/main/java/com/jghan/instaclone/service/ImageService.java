@@ -149,4 +149,12 @@ public class ImageService {
 //                .withCannedAcl(CannedAccessControlList.PublicRead));
 //        return s3Client.getUrl(bucket, fileName).toString();
 //    }
+
+
+    @Transactional
+    public void delete(int imageId){
+        imageRepository.delete(imageId);
+
+
+    }
 }

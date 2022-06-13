@@ -94,6 +94,7 @@
         <tr th:each="image: ${dto.user.images}">
           <div class="img-box">
             <a href="">
+<!--              <div th:text="${image.id}">123</div>-->
 
               <img src="/4cbe394f-e018-4dd0-a509-f0724efe41c4_dog2.jpg"
               th:src="@{|https://instaclonepjt-bucket.s3.ap-northeast-2.amazonaws.com/${image.postImageUrl}|}"/>
@@ -108,7 +109,17 @@
 <!--              <a href="#" class=""> <i class="fas fa-heart"></i><span th:text="${image.likes.size()}">999</span>로 해도된다.-->
               </a>
             </div>
+            <div th:if="${dto.pageOwnerState == true}">
+<!--              <button type="button"  class="btn btn-sm btn-danger" onClick="imageDelete('${image.id'})">삭제</button>-->
+
+              <button class="btn btn-sm btn-danger" th:attr="onclick =|imageDelete('${image.id}')|">삭제</button>
+
+
+            </div>
+
           </div>
+
+
         </tr>
         <!--이미지들end-->
 

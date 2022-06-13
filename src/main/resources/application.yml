@@ -1,19 +1,19 @@
 server:
-  port: '8080'
+  port: '8070'
 
 
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
 
-    username: jghan
-    url: jdbc:mariadb://instaclone.c1rverakfndv.ap-northeast-2.rds.amazonaws.com:3306/instaclone?serverTimezone=Asia/Seoul
-    password: whdrjffbs12!
+#    username: jghan
+#    url: jdbc:mariadb://instaclone.c1rverakfndv.ap-northeast-2.rds.amazonaws.com:3306/instaclone?serverTimezone=Asia/Seoul
+#    password: whdrjffbs12!
 #    url: jdbc:mariadb://instaclone.c1rverakfndv.ap-northeast-2.rds.amazonaws.com:3306/instaclone?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
 
-#    username: jghan
-#    url: jdbc:mariadb://localhost:3406/instapjt?serverTimezone=Asia/Seoul
-#    password: '0000'
+    username: jghan
+    url: jdbc:mariadb://localhost:3406/instapjt?serverTimezone=Asia/Seoul
+    password: '0000'
 
 
   jpa:
