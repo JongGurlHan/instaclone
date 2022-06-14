@@ -152,9 +152,7 @@ public class ImageService {
 
 
     @Transactional
-    public void delete(int imageId){
-        imageRepository.delete(imageId);
-
-
+    public void deleteImage(int imageId){
+        imageRepository.deleteImage(imageId);
     }
 }

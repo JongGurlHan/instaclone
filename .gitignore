@@ -38,4 +38,4 @@ out/
 .vscode/
 
 ###보안###
-src/main/resources/credentails.yml
+src/main/resources/application.yml

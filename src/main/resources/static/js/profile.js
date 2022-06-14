@@ -167,23 +167,25 @@ function imageDelete(imageId) {
     var confirmAlert = confirm('정말로 삭제하시겠습니까?');
     if(confirmAlert){
 
-        $.ajax({
-            type : 'DELETE'
-           ,url : "/board/delete"
-           ,dataType : 'json'
-           ,data : JSON.stringify(boardIdxArray)
-           ,contentType: 'application/json'
-           ,success : function(result) {
-                alert("해당글이 정상적으로 삭제되었습니다.");
-                location.href = "/";
-           },
-           error: function(request, status, error) {
+        alert(imageId);
 
-           }
-       })
+//       	$.ajax({
+//            type:"DELETE",
+//            url : "/api/image/delete/"+imageId,
+//       	    dataType:"json"
+//       	}).done(res=>{
+//       	    alert("해당사진이 정상적으로 삭제되었습니다.");
+//
+//       	}).fail(error=>{
+//           error: function(request, status, error) {
+//
+//           }});
+
+
+
     }
+
+
 }
-
-
 
 
